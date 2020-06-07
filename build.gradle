@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+}
+
+group 'com.github.mrmks'
+version '0.0.3'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"}
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compileOnly 'org.bukkit:bukkit:1.12.2-R0.1-SNAPSHOT'
+    compileOnly files("../Libraries/SkillAPI v1.9.jar")
+    compileOnly files("../Libraries/MCCore.jar")
+}
+
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'plugin.yml'
+
+        // replace version and mcversion
+        expand 'version':project.version
+    }
+
+    // copy everything else except the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'plugin.yml'
+    }
+}

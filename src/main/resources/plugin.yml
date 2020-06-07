@@ -1,0 +1,4 @@
+name: SkillAPI_ParticleExtend
+main: com.github.MrMks.sapi.particle.Main
+version: ${version}
+depend: [SkillAPI]
